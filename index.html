@@ -1,0 +1,27 @@
+export default {
+  async fetch(request, env) {
+    // 获取访问的路径
+    const url = new URL(request.url);
+
+    // 如果直接访问根目录 (也就是你点“访问”按钮那个网址)
+    if (url.pathname === "/") {
+      return new Response(`
+        <html>
+          <body style="background:#0a0e1a; color:#00d4aa; display:flex; justify-content:center; align-items:center; height:100vh; font-family:sans-serif;">
+            <div style="text-align:center; border:1px solid #1e2d45; padding:20px; border-radius:12px;">
+              <h1>● GATE.IO AI 代理已启动</h1>
+              <p style="color:#64748b;">API Key 已在后台加载完成</p>
+              <p style="font-size:12px;">当前状态：等待前端指令</p>
+            </div>
+          </body>
+        </html>
+      `, {
+        headers: { "Content-Type": "text/html; charset=utf-8" }
+      });
+    }
+
+    // 这里保留你原来的数据库查询或其他逻辑...
+    // const result = await env.MY_DB.prepare(...).run();
+    // return new Response(JSON.stringify(result));
+  }
+}
